@@ -25,4 +25,9 @@ Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('k
 Route::post('/barang', [BarangController::class, 'store']);
 Route::put('/barang/{id}', [BarangController::class, 'update']);
 Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
-Route::get('/barang/{id}', [BarangController::class, 'show']);
+Route::get('/barang/{id}', [BarangController::class, 'show'])
+    ->name('barang.show');
+
+Route::get('/bantuan', function () {
+    return view('bantuan');
+})->name('bantuan');

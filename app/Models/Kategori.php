@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    protected $fillable = ['nama'];
+    use HasFactory;
+
+    protected $fillable = [
+        'nama',
+        'deskripsi'
+    ];
 
     public function barang()
     {
