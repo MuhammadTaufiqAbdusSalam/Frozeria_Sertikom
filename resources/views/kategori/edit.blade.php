@@ -2,7 +2,7 @@
 
 <script>
 
-function editKategori(id,nama,deskripsi){
+function editKategori(id, nama, deskripsi){
 
     Swal.fire({
 
@@ -10,25 +10,64 @@ function editKategori(id,nama,deskripsi){
 
         html:
             `
-            <input id="swalNama"
-                   class="swal2-input"
-                   placeholder="Nama kategori"
-                   value="${nama}">
+            <input
+                id="swalNama"
+                class="swal2-input"
+                placeholder="Nama kategori"
+                value="${nama}">
 
-            <textarea id="swalDeskripsi"
-                      class="swal2-textarea"
-                      placeholder="Deskripsi">${deskripsi ?? ''}</textarea>
+            <div
+                id="errorNama"
+                style="
+                    display:none;
+                    color:#dc3545;
+                    font-size:13px;
+                    margin-top:-10px;
+                    margin-bottom:10px;
+                    text-align:left;
+                ">
+
+                Nama kategori wajib diisi
+
+            </div>
+
+            <textarea
+                id="swalDeskripsi"
+                class="swal2-textarea"
+                placeholder="Deskripsi">${deskripsi ?? ''}</textarea>
             `,
 
         showCancelButton: true,
+
         confirmButtonText: 'Simpan',
+
+        focusConfirm: false,
 
         preConfirm: () => {
 
+            let nama = $('#swalNama').val().trim();
+
+            let deskripsi = $('#swalDeskripsi').val();
+
+            // RESET ERROR
+            $('#swalNama').css('border', '1px solid #d9d9d9');
+
+            $('#errorNama').hide();
+
+            // VALIDASI
+            if(nama == ''){
+
+                $('#swalNama').css('border', '1px solid #dc3545');
+
+                $('#errorNama').show();
+
+                return false;
+            }
+
             return {
 
-                nama: $('#swalNama').val(),
-                deskripsi: $('#swalDeskripsi').val()
+                nama: nama,
+                deskripsi: deskripsi
 
             };
 
@@ -41,18 +80,38 @@ function editKategori(id,nama,deskripsi){
             $.ajax({
 
                 url: '/kategori/' + id,
+
                 type: 'PUT',
 
                 data: {
 
                     nama: result.value.nama,
+
                     deskripsi: result.value.deskripsi
 
                 },
 
                 success: function(){
 
-                    location.reload();
+                    Swal.fire({
+
+                        icon: 'success',
+
+                        title: 'Berhasil',
+
+                        text: 'Kategori berhasil diupdate',
+
+                        timer: 1500,
+
+                        showConfirmButton: false
+
+                    });
+
+                    setTimeout(() => {
+
+                        location.reload();
+
+                    }, 1500);
 
                 }
 
@@ -63,6 +122,15 @@ function editKategori(id,nama,deskripsi){
     });
 
 }
+
+// HILANGKAN BORDER MERAH SAAT MENGETIK
+$(document).on('keyup', '#swalNama', function(){
+
+    $(this).css('border', '1px solid #d9d9d9');
+
+    $('#errorNama').hide();
+
+});
 
 </script>
 

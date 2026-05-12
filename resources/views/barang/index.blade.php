@@ -37,7 +37,7 @@
 
                             </div>
 
-                            <div class="icon-card bg-primary">
+                            <div class="icon-card bg-success">
                                 <i class="fas fa-box"></i>
                             </div>
 
@@ -69,7 +69,7 @@
 
                             </div>
 
-                            <div class="icon-card bg-success">
+                            <div class="icon-card bg-primary">
                                 <i class="fas fa-tags"></i>
                             </div>
 

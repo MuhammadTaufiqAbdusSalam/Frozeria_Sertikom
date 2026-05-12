@@ -32,6 +32,7 @@
 
                     <input type="hidden" id="id">
 
+                    <!-- FOTO -->
                     <div class="form-group">
 
                         <label>Foto barang</label>
@@ -43,6 +44,7 @@
 
                     </div>
 
+                    <!-- NAMA -->
                     <div class="form-group">
 
                         <label>Nama barang</label>
@@ -50,12 +52,18 @@
                         <input
                             type="text"
                             id="nama"
-                            class="form-control">
+                            class="form-control"
+                            required>
+
+                        <div class="invalid-feedback">
+                            Nama barang wajib diisi
+                        </div>
 
                     </div>
 
                     <div class="row">
 
+                        <!-- KATEGORI -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -64,7 +72,12 @@
 
                                 <select
                                     id="kategori_id"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                    <option value="">
+                                        -- Pilih kategori --
+                                    </option>
 
                                     @foreach ($kategoris as $k)
 
@@ -76,10 +89,15 @@
 
                                 </select>
 
+                                <div class="invalid-feedback">
+                                    Kategori wajib dipilih
+                                </div>
+
                             </div>
 
                         </div>
 
+                        <!-- SATUAN -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -89,7 +107,12 @@
                                 <input
                                     type="text"
                                     id="satuan"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                <div class="invalid-feedback">
+                                    Satuan wajib diisi
+                                </div>
 
                             </div>
 
@@ -99,6 +122,7 @@
 
                     <div class="row">
 
+                        <!-- STOK -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -108,12 +132,18 @@
                                 <input
                                     type="number"
                                     id="stok"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                <div class="invalid-feedback">
+                                    Jumlah stok wajib diisi
+                                </div>
 
                             </div>
 
                         </div>
 
+                        <!-- STOK MINIMUM -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -123,7 +153,12 @@
                                 <input
                                     type="number"
                                     id="stok_minimum"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                <div class="invalid-feedback">
+                                    Stok minimum wajib diisi
+                                </div>
 
                             </div>
 
@@ -133,6 +168,7 @@
 
                     <div class="row">
 
+                        <!-- HARGA JUAL -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -142,12 +178,18 @@
                                 <input
                                     type="number"
                                     id="harga_jual"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                <div class="invalid-feedback">
+                                    Harga jual wajib diisi
+                                </div>
 
                             </div>
 
                         </div>
 
+                        <!-- HARGA BELI -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -157,7 +199,12 @@
                                 <input
                                     type="number"
                                     id="harga_beli"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
+
+                                <div class="invalid-feedback">
+                                    Harga beli wajib diisi
+                                </div>
 
                             </div>
 
@@ -167,6 +214,7 @@
 
                     <div class="row">
 
+                        <!-- BERAT -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -182,6 +230,7 @@
 
                         </div>
 
+                        <!-- LOKASI -->
                         <div class="col-md-6">
 
                             <div class="form-group">
@@ -199,6 +248,7 @@
 
                     </div>
 
+                    <!-- DESKRIPSI -->
                     <div class="form-group">
 
                         <label>Deskripsi</label>
@@ -223,8 +273,12 @@
 
                     </button>
 
-                    <button class="btn btn-success">
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
                         Simpan Barang
+
                     </button>
 
                 </div>
@@ -236,3 +290,89 @@
     </div>
 
 </div>
+
+<!-- SCRIPT VALIDASI -->
+<script>
+
+    // VALIDASI SUBMIT
+    $('#formBarang').submit(function(e){
+
+        let valid = true;
+
+        // hapus semua error dulu
+        $('.form-control').removeClass('is-invalid');
+
+        // VALIDASI NAMA
+        if($('#nama').val().trim() == ''){
+
+            $('#nama').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI KATEGORI
+        if($('#kategori_id').val() == ''){
+
+            $('#kategori_id').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI SATUAN
+        if($('#satuan').val().trim() == ''){
+
+            $('#satuan').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI STOK
+        if($('#stok').val() == ''){
+
+            $('#stok').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI STOK MINIMUM
+        if($('#stok_minimum').val() == ''){
+
+            $('#stok_minimum').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI HARGA JUAL
+        if($('#harga_jual').val() == ''){
+
+            $('#harga_jual').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // VALIDASI HARGA BELI
+        if($('#harga_beli').val() == ''){
+
+            $('#harga_beli').addClass('is-invalid');
+
+            valid = false;
+        }
+
+        // JIKA ADA YANG KOSONG
+        if(valid == false){
+
+            e.preventDefault();
+
+            return false;
+        }
+
+    });
+
+    // HILANGKAN GARIS MERAH SAAT DIKETIK
+    $('.form-control').on('keyup change', function(){
+
+        $(this).removeClass('is-invalid');
+
+    });
+
+</script>
